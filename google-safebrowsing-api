@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+import requests
+#
+# GET your api key first 
+# documentation: https://developers.google.com/safe-browsing
+#
+##
+apikey=""
+
+
+payload='''
+  {
+    "client": {
+      "clientId":      "egearge.com",
+      "clientVersion": "1.5.2"
+    },
+    "threatInfo": {
+      "threatTypes":      ["MALWARE", "SOCIAL_ENGINEERING"],
+      "platformTypes":    ["WINDOWS"],
+      "threatEntryTypes": ["URL"],
+      "threatEntries": [
+        {"url": "https://www.deu.edu.tr"},
+        {"url": "https://www.siyahsapka.org/"},
+        {"url": "https://www.halkbank.com.tr"},
+        {"url": "http://testsafebrowsing.appspot.com/apiv4/ANY_PLATFORM/MALWARE/URL/"}
+      ]
+    }
+  }
+'''
+
+req=requests.post(url="https://safebrowsing.googleapis.com/v4/threatMatches:find?key="+apikey)
+print(req.text)
